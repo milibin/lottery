@@ -1,0 +1,330 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #003366 0%, #001a33 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.moving-names {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.name-row {
+    position: absolute;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    line-height: 1.5;
+    animation: moveLeft var(--duration) linear infinite;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+.name-row.active {
+    animation: none;
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes floating {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, 50px) rotate(5deg);
+    }
+    50% {
+        transform: translate(0, 100px) rotate(-5deg);
+    }
+    75% {
+        transform: translate(-100px, 50px) rotate(5deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2vh 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2vw;
+    margin-bottom: 3vh;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    flex-shrink: 0;
+    min-width: 80px;
+    max-width: 150px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: clamp(18px, 3vw, 24px);
+    text-shadow: 0 0 10px rgba(24,144,255,0.5);
+}
+
+h2 {
+    color: #ffffff;
+    margin-bottom: 0;
+    font-size: clamp(16px, 2.5vw, 20px);
+    text-shadow: 0 0 10px rgba(24,144,255,0.5);
+}
+
+.lottery-box {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 3vh 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2),
+                inset 0 0 20px rgba(255,255,255,0.1);
+    text-align: center;
+    margin-bottom: 3vh;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.result {
+    font-size: clamp(24px, 5vw, 48px);
+    font-weight: bold;
+    margin: 2vh 0;
+    min-height: 15vh;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    text-shadow: 0 0 15px rgba(255,99,71,0.8);
+}
+
+.avatar {
+    width: min(200px, 40vw);
+    height: min(200px, 40vw);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(24,144,255,0.8);
+    box-shadow: 0 0 20px rgba(24,144,255,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(24,144,255,0.8);
+}
+
+.winner-avatar {
+    width: min(60px, 15vw);
+    height: min(60px, 15vw);
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vw;
+    margin-top: 2vh;
+}
+
+.btn {
+    padding: clamp(8px, 1.5vh, 15px) clamp(20px, 4vw, 40px);
+    font-size: clamp(16px, 2.5vw, 18px);
+    background: linear-gradient(45deg, #1890ff, #003366);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 0 15px rgba(24,144,255,0.3);
+}
+
+.btn:disabled {
+    background: linear-gradient(45deg, #999, #666);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+.btn:disabled:hover {
+    background: linear-gradient(45deg, #999, #666);
+    transform: none;
+    box-shadow: none;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #40a9ff, #004c99);
+    box-shadow: 0 0 20px rgba(24,144,255,0.5);
+    transform: translateY(-2px);
+}
+
+.select {
+    padding: clamp(8px, 1.5vh, 15px);
+    font-size: clamp(14px, 2vw, 16px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    background: rgba(0, 51, 102, 0.9);
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+    cursor: pointer;
+    position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.select option {
+    background: rgba(0, 51, 102, 0.95);
+    color: white;
+    padding: 10px;
+}
+
+/* 适配移动端的触摸操作 */
+@media (max-width: 768px) {
+    .select {
+        font-size: 16px;
+        min-width: 120px;
+    }
+    
+    .select option {
+        font-size: 16px;
+    }
+}
+
+.winner-list {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 3vh 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    max-height: 50vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.winner-list h2 {
+    color: white;
+    margin-bottom: 2vh;
+    position: sticky;
+    top: 0;
+    background: rgba(0,51,102,0.8);
+    padding: 10px 0;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.winner-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.winner-list li {
+    padding: 1.5vh 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.winner-list li:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* 自定义滚动条样式 */
+.winner-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.winner-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.winner-list::-webkit-scrollbar-thumb {
+    background: rgba(24,144,255,0.5);
+    border-radius: 4px;
+}
+
+.winner-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(24,144,255,0.8);
+} 

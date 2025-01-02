@@ -1,0 +1,17 @@
+lottery-system/
+  ├── index.html
+  ├── css/
+  │   └── style.css
+  ├── js/
+  │   └── main.js
+  ├── data/
+  │   └── employees.json
+  └── images/
+      ├── README.md
+      ├── logo.png
+      └── avatars/
+          ├── 1.jpg
+          ├── 2.jpg
+          ├── 3.jpg
+          ├── 4.jpg
+          └── 5.jpg 

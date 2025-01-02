@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年会抽奖系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="moving-names"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="images/logo.png" alt="马勒工业Logo">
+            </div>
+            <div class="title">
+                <h1>马勒工业热系统（天津）有限公司</h1>
+                <h2>年会抽奖系统</h2>
+            </div>
+        </div>
+        
+        <div class="lottery-box">
+            <div id="result" class="result">准备开始</div>
+            <div class="controls">
+                <button id="startBtn" class="btn" disabled>开始抽奖</button>
+                <select id="prizeSelect" class="select">
+                    <option value="0">请选择奖项</option>
+                    <option value="1">一等奖</option>
+                    <option value="2">二等奖</option>
+                    <option value="3">三等奖</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="winner-list">
+            <h2>中奖名单</h2>
+            <ul id="winnersList"></ul>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html> 
